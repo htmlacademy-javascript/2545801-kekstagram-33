@@ -54,7 +54,6 @@ getNumbers('ECMAScript 2022'); // 2022
 '14:00' - начало встречи
 90 - продолжительность встречи в минутах
 */
-
 const isMeetingPossible = (
   startWorkTime,
   endWorkTime,

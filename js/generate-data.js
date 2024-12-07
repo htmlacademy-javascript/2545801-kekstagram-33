@@ -21,7 +21,7 @@ const generateCommentMessage = (array) => {
   return resultCommentMessages.join(' ');
 };
 
-// Функция получает случаное имя комментатора из переданного массива имен
+// Функция возвращает случаное имя комментатора из переданного массива имен
 const getCommentName = (array) => array[getRandomInteger(0, array.length - 1)];
 
 // Функция генерирует объект - комментарий
