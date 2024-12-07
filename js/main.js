@@ -1,5 +1,5 @@
 // Модуль - точка входа
 
-import {generatePhotoCards} from './generate-data.js';
+import {renderPictures} from './render-pictures.js';
 
-generatePhotoCards();
+renderPictures();

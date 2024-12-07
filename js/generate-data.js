@@ -38,8 +38,8 @@ const generateComments = () => Array.from({length: getRandomInteger(1, 30)}, gen
 // Функция геерирует объект - описание опубликованной фотографии
 const generatePhotoCard = () => ({
   id: generatePhotoId(),
-  url: `photos/${generatePhotoUrl()}`,
-  description: 'Описание фотографии. Описание придумайте самостоятельно.',
+  url: `/photos/${generatePhotoUrl()}.jpg`,
+  description: 'Описание фотографии.',
   likes: getRandomInteger(15, 200),
   comments: generateComments()
 });
