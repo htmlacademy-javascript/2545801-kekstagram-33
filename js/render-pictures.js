@@ -37,26 +37,50 @@ const renderPictures = () => {
       bigPictureElement.classList.remove('hidden');
       bigPictureImg.src = url;
       likesCount.textContent = likes;
-      socialCommentShownCount.textContent = '';
-      socialCommentTotalCount.textContent = comments.length;
       socialCaption.textContent = description;
       socialComments.innerHTML = '';
 
-      comments.forEach(({avatar, message, name}) => {
-        const commentElement = socialComment.cloneNode(true);
-        commentElement.querySelector('.social__picture').src = avatar;
-        commentElement.querySelector('.social__picture').alt = name;
-        commentElement.querySelector('.social__text').textContent = message;
-        socialComments.appendChild(commentElement);
-      });
+      const renderComments = (array) => {
+        array.forEach(({avatar, message, name}) => {
+          const commentElement = socialComment.cloneNode(true);
+          commentElement.querySelector('.social__picture').src = avatar;
+          commentElement.querySelector('.social__picture').alt = name;
+          commentElement.querySelector('.social__text').textContent = message;
+          socialComments.appendChild(commentElement);
+        });
+      };
 
-      // later
-      socialCommentShownCount.classList.add('hidden');
-      commentsLoader.classList.add('hidden');
+      socialCommentTotalCount.textContent = comments.length;
+
+      const step = 5;
+      let visibleCommentsCount = step;
+      renderComments(comments.slice(0, visibleCommentsCount));
+
+      commentsLoader.classList.remove('hidden');
+      socialCommentShownCount.textContent = visibleCommentsCount;
+
+      if (comments.length <= visibleCommentsCount) {
+        commentsLoader.classList.add('hidden');
+        socialCommentShownCount.textContent = comments.length;
+      }
+
+      const loadComments = () => {
+        let commentsCount = visibleCommentsCount;
+        renderComments(comments.slice(visibleCommentsCount, visibleCommentsCount += step));
+        commentsCount += step;
+        commentsLoader.classList.remove('hidden');
+        if (commentsCount >= comments.length) {
+          commentsCount = comments.length;
+          commentsLoader.classList.add('hidden');
+        }
+        socialCommentShownCount.textContent = commentsCount;
+      };
+
+      commentsLoader.addEventListener('click', loadComments);
     });
   });
 
-  return picturesElement.appendChild(picturesFragment);
+  picturesElement.appendChild(picturesFragment);
 };
 
 export {renderPictures};
