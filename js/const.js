@@ -1,26 +1,21 @@
 // Модуль содержит константы
 
-const NAMES = [
-  'Иван',
-  'Хуан Себастьян',
-  'Мария',
-  'Кристоф',
-  'Виктор',
-  'Юлия',
-  'Люпита',
-  'Вашингтон',
-];
+const DATA_ERROR_MESSAGE_TIME = 5000;
+const INITIAL_COMMENTS_COUNT = 5;
+const VISIBLE_COMMENTS_COUNT_STEP = 5;
+const MIN_PREVIEW_IMAGE_SCALE_VALUE = 0.25;
+const MAX_PREVIEW_IMAGE_SCALE_VALUE = 1;
+const PREVIEW_IMAGE_SCALE_STEP_VALUE = 0.25;
+const MAX_HASHTAGS_COUNT = 5;
+const TEXT_DESCRIPTION_LENGTH = 140;
 
-const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо.',
-  'Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
-  'В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают.',
-  'Как можно было поймать такой неудачный момент?!'
-];
-
-export {NAMES, MESSAGES};
+export {
+  DATA_ERROR_MESSAGE_TIME,
+  INITIAL_COMMENTS_COUNT,
+  VISIBLE_COMMENTS_COUNT_STEP,
+  MIN_PREVIEW_IMAGE_SCALE_VALUE,
+  MAX_PREVIEW_IMAGE_SCALE_VALUE,
+  PREVIEW_IMAGE_SCALE_STEP_VALUE,
+  MAX_HASHTAGS_COUNT,
+  TEXT_DESCRIPTION_LENGTH
+};
