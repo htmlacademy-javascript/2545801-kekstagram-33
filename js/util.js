@@ -1,5 +1,33 @@
 // Модуль содержит утилитарные функции
 
+import {DATA_ERROR_MESSAGE_TIME} from './const.js';
+
+// Функция показывает сообщение об ошибке загрузки данных
+const showDataError = () => {
+  const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+  const dataErrorFragment = document.createDocumentFragment();
+  const dataErrorElement = dataErrorTemplate.cloneNode(true);
+  dataErrorFragment.appendChild(dataErrorElement);
+  document.body.appendChild(dataErrorFragment);
+
+  setTimeout(() => {
+    dataErrorElement.remove();
+  }, DATA_ERROR_MESSAGE_TIME);
+};
+
+// Функция проверяет нажата ли клавиша Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+// // Функция игнорирует нажатие Escape когда в фокусе текстовое поле
+const onTextInputFocusKeydown = (evt) => {
+  evt.stopPropagation();
+};
+
+export {showDataError, isEscapeKey, onTextInputFocusKeydown};
+
+/*
+later
+
 // Функция возвращает случайное число из диапазона от min до max включительно
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(min, max));
@@ -24,8 +52,4 @@ const createRandomIntegerFromRangeGenerator = (min, max) => {
     return currentValue;
   };
 };
-
-// Функция проверяет нажата ли клавиша Escape
-const isEscapeKey = (evt) => evt.key === 'Escape';
-
-export {getRandomInteger, createRandomIntegerFromRangeGenerator, isEscapeKey};
+*/

@@ -1,6 +1,7 @@
 // Модуль - точка входа
 
-import './form.js';
-import {renderPictures} from './render-pictures.js';
+import {renderData} from './render-data.js';
+import {setUserFormSubmit} from './upload-form.js';
 
-renderPictures();
+renderData();
+setUserFormSubmit();

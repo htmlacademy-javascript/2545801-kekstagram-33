@@ -1,5 +1,7 @@
+// Файл допзаданий с функциями
+
 // Функция для проверки длины строки
-const checkStringLength = function (string, stringMaxLength) {
+const checkStringLength = (string, stringMaxLength) => {
   const normalizeString = string.toString();
   return normalizeString.length <= stringMaxLength;
 };
@@ -7,7 +9,7 @@ const checkStringLength = function (string, stringMaxLength) {
 checkStringLength('проверяемая строка', 20); // true
 
 // Функция для проверки, является ли строка палиндромом
-const isPalindrom = function (string) {
+const isPalindrom = (string) => {
   const normalizeString = string.toString().replaceAll(' ', '').toLowerCase();
   let reverseString = '';
 
@@ -21,7 +23,7 @@ const isPalindrom = function (string) {
 isPalindrom('Лёша на полке клопа нашёл '); // true
 
 // Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа. Если в строке нет ни одной цифры, функция должна вернуть NaN
-const getNumbers = function (string) {
+const getNumbers = (string) => {
   const normalizeString = string.toString();
   let result = '';
 
