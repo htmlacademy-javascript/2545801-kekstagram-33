@@ -1,13 +1,15 @@
 // Модуль отвечает за фильтр отрисованных изображений
 
 import {MAX_RANDOM_IMAGES_VALUE} from './const.js';
-import {getRandomUniqArray, debounce} from './util.js';
-import {renderThumbnails} from './render-thumbnails.js';
+import {getRandomUniqArray} from './util.js';
 
 const imgFilters = document.querySelector('.img-filters');
+const imgFiltresForm = imgFilters.querySelector('.img-filters__form');
 const filterDefault = imgFilters.querySelector('#filter-default');
 const filterRandom = imgFilters.querySelector('#filter-random');
 const filterDiscussed = imgFilters.querySelector('#filter-discussed');
+
+let currentFilter = filterDefault.id;
 
 // Функиця очищает все миниатюры
 const clearThumbnails = () => {
@@ -15,12 +17,6 @@ const clearThumbnails = () => {
   thumbnails.forEach((picture) => {
     picture.remove();
   });
-};
-
-// Функция очищает активный класс фильтра
-const clearActiveButtonClass = () => {
-  const filterButtonActive = imgFilters.querySelector('.img-filters__button--active');
-  filterButtonActive.classList.remove('img-filters__button--active');
 };
 
 // Функция возвращает массив с уникальными миниатюрами
@@ -42,36 +38,34 @@ const getDiscussedThumbnails = (pictures) => {
   return picturesCopy.sort(compareThumbnailsByComments);
 };
 
+// Функция возвращает массив миниатюр согласно выбранному фильтру
+function getFilterThumbnails(pictures) {
+  let filteredThumbnails = [];
+
+  if (currentFilter === filterDefault.id) {
+    filteredThumbnails = pictures;
+  }
+  if (currentFilter === filterRandom.id) {
+    filteredThumbnails = getRandomThumbnails(pictures);
+  }
+  if (currentFilter === filterDiscussed.id) {
+    filteredThumbnails = getDiscussedThumbnails(pictures);
+  }
+
+  return filteredThumbnails;
+}
+
 // Функция рендерит миниатюры согласно выбранному фильтру
-const renderFilteredThumbnails = (pictures) => {
+const renderFilteredThumbnails = (cb) => {
   imgFilters.classList.remove('img-filters--inactive');
-
-  filterDefault.addEventListener('click', debounce((evt) => {
-    clearActiveButtonClass();
-    if (evt.target === filterDefault) {
-      filterDefault.classList.add('img-filters__button--active');
-    }
+  imgFiltresForm.addEventListener('click', (evt) => {
     clearThumbnails();
-    renderThumbnails(pictures);
-  }));
-
-  filterRandom.addEventListener('click', debounce((evt) => {
-    clearActiveButtonClass();
-    if (evt.target === filterRandom) {
-      filterRandom.classList.add('img-filters__button--active');
-    }
-    clearThumbnails();
-    renderThumbnails(getRandomThumbnails(pictures));
-  }));
-
-  filterDiscussed.addEventListener('click', debounce((evt) => {
-    clearActiveButtonClass();
-    if (evt.target === filterDiscussed) {
-      filterDiscussed.classList.add('img-filters__button--active');
-    }
-    clearThumbnails();
-    renderThumbnails(getDiscussedThumbnails(pictures));
-  }));
+    const filterButton = evt.target.closest('.img-filters__button');
+    document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
+    filterButton.classList.add('img-filters__button--active');
+    currentFilter = document.querySelector('.img-filters__button--active').id;
+    cb();
+  });
 };
 
-export {renderFilteredThumbnails};
+export {getFilterThumbnails, renderFilteredThumbnails};

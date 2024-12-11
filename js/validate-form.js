@@ -25,7 +25,7 @@ const validateTextHashtags = (string) => {
     if (hashtag === '') {
       return true;
     }
-    /^#[a-zA-Zа-яА-Я0-9]{1,19}$/.test(hashtag);
+    return /^#[a-zA-Zа-яА-Я0-9]{1,19}$/.test(hashtag);
   });
 };
 
