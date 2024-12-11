@@ -5,7 +5,8 @@ import {isEscapeKey} from './util.js';
 import {
   MIN_PREVIEW_IMAGE_SCALE_VALUE,
   MAX_PREVIEW_IMAGE_SCALE_VALUE,
-  PREVIEW_IMAGE_SCALE_STEP_VALUE
+  PREVIEW_IMAGE_SCALE_STEP_VALUE,
+  FILE_TYPES
 } from './const.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -22,9 +23,21 @@ const imgUploadEffectLevel = imgUploadForm.querySelector('.img-upload__effect-le
 const sliderEffect = imgUploadEffectLevel.querySelector('.effect-level__slider');
 const effectLevelValue = imgUploadEffectLevel.querySelector('.effect-level__value');
 const imgUploadEffects = imgUploadForm.querySelector('.img-upload__effects');
+const fileChooserNode = imgUploadForm.querySelector('.img-upload__input[type=file]');
 
 let currentScalePreviewValue = MAX_PREVIEW_IMAGE_SCALE_VALUE;
 let imgUploadEffectsId = document.getElementById('effect-none').id;
+
+// Функция добавялет файл для отправки
+const chooseFile = () => {
+  const file = fileChooserNode.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    imgUploadPreview.src = URL.createObjectURL(file);
+  }
+};
 
 // Функция cбрасывает масштаб изображения
 const resetScalePreview = () => {
@@ -43,6 +56,7 @@ const resetImgUploadEffects = () => {
 
 // Функция открывает попап с изображением для загрузки
 const openImgUploadPopup = () => {
+  chooseFile();
   resetScalePreview();
   resetImgUploadEffects();
   document.querySelector('body').classList.add('modal-open');
