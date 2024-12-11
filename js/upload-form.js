@@ -80,7 +80,7 @@ const showErrorMessage = () => {
   errorFragment.appendChild(errorElement);
   document.body.appendChild(errorFragment);
 
-  closeMessage(errorElement, errorButton, errorInner, closeImgUploadPopup);
+  closeMessage(errorElement, errorButton, errorInner, () => {});
 };
 
 // Функция отправляет форму на сервер

@@ -42,7 +42,6 @@ const chooseFile = () => {
 // Функция cбрасывает масштаб изображения
 const resetScalePreview = () => {
   currentScalePreviewValue = MAX_PREVIEW_IMAGE_SCALE_VALUE;
-  scaleControlValue.value = `${MAX_PREVIEW_IMAGE_SCALE_VALUE * 100}%`;
   imgUploadPreview.style.transform = `scale(${MAX_PREVIEW_IMAGE_SCALE_VALUE})`;
 };
 
@@ -57,7 +56,6 @@ const resetImgUploadEffects = () => {
 // Функция открывает попап с изображением для загрузки
 const openImgUploadPopup = () => {
   chooseFile();
-  resetScalePreview();
   resetImgUploadEffects();
   document.querySelector('body').classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
@@ -66,6 +64,11 @@ const openImgUploadPopup = () => {
 
 // Функция закрывает попап с изображением для загрузки
 const closeImgUploadPopup = () => {
+  resetScalePreview();
+  imgUploadEffectsId = 'effect-none';
+  imgUploadEffectLevel.classList.add('hidden');
+  imgUploadPreview.style.filter = 'none';
+  imgUploadForm.reset();
   document.querySelector('body').classList.remove('modal-open');
   imgUploadOverlay.classList.add('hidden');
   imgUploadInput.value = '';
